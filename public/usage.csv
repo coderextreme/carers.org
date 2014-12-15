@@ -1,0 +1,6 @@
+email,99,#0000FF,of carers use email
+email-instant messaging,45,#00FF00,of carers use email and instant messaging
+email-instant messaging-video chat,20,#FF0000,of carers use email and instant messaging and video chat
+email-instant messaging-other,25,#00FFFF,of carers use email and instant messaging but not video chat
+email-other,55,#FF00FF,of carers use email but not instant messaging
+other,1,#FFFF00,of carers use the internet but not for email
