@@ -1,7 +1,8 @@
 {
   "name": "carers.org",
+  "private": true,
   "description": "Carers.Org d3 express example",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "express": "~4.9.0",
     "body-parser": "~1.8.1",
@@ -12,6 +13,7 @@
     "jade": "~1.6.0",
     "Sentimental": "^1.0.1",
     "express": "4.3.1",
-    "twit": "^1.1.18"
+    "twit": "^1.1.18",
+    "topojson": "1"
   }
 }
