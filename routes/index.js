@@ -22,8 +22,7 @@ function performAnalysis(tweetSet, geoSet) {
   for(var i = 0; i < tweetSet.length; i++) {
     tweet = tweetSet[i]['text'];
     if (tweetSet[i].geo != null) {
-	tweetSet[i].geo['tweet'] = tweet;
-	geoSet.push(tweetSet[i].geo);
+	geoSet.push(tweetSet[i]);
     }
     retweets = tweetSet[i]['retweet_count'];
     favorites = tweetSet[i]['favorite_count'];
@@ -91,16 +90,18 @@ exports.search = function(req, res) {
       (today.getMonth() + 1) + '-' + today.getDate(), count:2000}, function(err, data) {
         // perform sentiment analysis
 	score = performAnalysis(data['statuses'], geoSet);
-        console.log("score:", score)
-        console.log("choice:", choices[i])
-        console.log("geoSet:", geoSet)
+        console.log("score:", score);
+        console.log("choice:", choices[i]);
+	for (var tweet in geoSet) {
+		console.log("geoSet:", geoSet[tweet].geo.coordinates);
+	}
         //  determine winner
         if(score > highestScore) {
           highestScore = score;
           highestChoice = choices[i];
           console.log("winner:",choices[i])
         }
-        console.log("")
+        console.log("");
       });
     })(i)
   }

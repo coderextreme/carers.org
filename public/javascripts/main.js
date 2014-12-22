@@ -46,6 +46,7 @@ $(function () {
           $("#decision-text").fadeIn();
           $("#score").fadeIn();
           $("#again").show()
+	  data['geoSet'].forEach(mapTweet);
         });
       } else {
         // error code
