@@ -45,7 +45,7 @@ d3.json("world-topo-min.json", function(error, world) {
 
 function draw(topo) {
 
-  svg.append("path")
+  g.append("path")
      .datum(graticule)
      .attr("class", "graticule")
      .attr("d", path);
@@ -183,38 +183,34 @@ var color = d3.scale.category20c();
 
 // add tweets to the map
 function mapTweet(tweetData, geoIndex) {
-    var tipText; 
     console.log(tweetData.geo.coordinates);
     
-    addpoint(tweetData.geo.coordinates[1], tweetData.geo.coordinates[0], tweetData.text, color(geoIndex));
+    addCircle([tweetData.geo.coordinates[1], tweetData.geo.coordinates[0]], tweetData.text, color(geoIndex));
 };
 
 
 var tweetNumber = 0;
 
-function addCircle(coordinates, tipText, r) {
+function addCircle(coordinates, tipText, col) {
     tweetNumber++;
     // too many tweets
     if(tweetNumber==40){
       tweetNumber=0;
     }
+  var x = projection([coordinates[0],coordinates[1]])[0];
+  var y = projection([coordinates[0],coordinates[1]])[1];
 
     //removes expired circles 
     $('#'+tweetNumber).remove();
 
-    //determine if radius size needs to be bumped
-    if(arguments.length==3){
-      var rad=r;
-    }else{
-      var rad=10;
-    }
+    var rad=5;
     // add radar-style ping effect
-    svg.append('svg:circle')
+    g.append('svg:circle')
         .style("stroke", "rgba(255,49,49,.7)")
         .style("stroke-width", 1)
         .style("fill", "rgba(0,0,0,0)")
-        .attr('cx', coordinates[0])
-        .attr('cy', coordinates[1])
+        .attr('cx', x)
+        .attr('cy', y)
         .attr('r', rad)
         .transition()
           .delay(0)
@@ -231,23 +227,35 @@ function addCircle(coordinates, tipText, r) {
 
 
     // add circles representing tweets
-    svg.append('svg:circle')
+    var tweet = g.append('svg:circle')
         .attr("class", "tweetCircles")
         // add an id such that each circle is mapped to a number, remove earliest circles once 10 exist on screen
         .attr("id", tweetNumber)
         .style("stroke", "rgba(255,49,49,.7)")
         .style("stroke-width", 1)
-        .style("fill", "rgba(240,49,49,1)")
-        .attr('cx', coordinates[0])
-        .attr('cy', coordinates[1])
+        .style("fill", col)
+        .attr('cx', x)
+        .attr('cy', y)
         .attr('r', rad);
 
-    svg.append("text")
-        .attr('x', coordinates[0])
-        .attr('y', coordinates[1])
-        .attr('dy', ".35em")
-        .style("fill", "rgba(49,240,49,1)")
-	.text(tipText);
+  //offsets for tooltips
+  var offsetL = document.getElementById('container').offsetLeft+20;
+  var offsetT = document.getElementById('container').offsetTop+10;
+
+  //tooltips
+  tweet
+    .on("mousemove", function(d,i) {
+
+      var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+
+      tooltip.classed("hidden", false)
+             .attr("style", "left:"+(mouse[0]+offsetL)+"px;top:"+(mouse[1]+offsetT)+"px")
+             .html(tipText);
+
+      })
+      .on("mouseout",  function(d,i) {
+        tooltip.classed("hidden", true);
+      }); 
 };
 
 
