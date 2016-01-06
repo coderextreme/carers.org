@@ -12,3 +12,5 @@ $ node app.js
 ```
 
 visit localhost:8080
+
+For previous twitter map visualizations, see twittermap
