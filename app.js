@@ -31,7 +31,7 @@ app.use(function(err, req, res, next) {
 app.use(express.static(path.join(__dirname, '.')));
 
 http.createServer(app).listen(app.get('port'), function () {
-	console.log('express server started on port %s', app.get('port'));
+	console.log('express server started visit http://localhost:%s/', app.get('port'));
 });
 
 module.exports = app;

@@ -11,6 +11,6 @@ $ npm install
 $ node app.js
 ```
 
-visit localhost:8080
+visit http://localhost:3000
 
 For previous twitter map visualizations, see twittermap

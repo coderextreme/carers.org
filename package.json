@@ -2,12 +2,13 @@
   "name": "carers.org",
   "private": true,
   "description": "Carers.Org d3 express example",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "app.js",
   "dependencies": {
-    "express": "~4.9.0"
+    "express": "*"
   },
   "engines": {
-	"node": "5.3.0"
+    "node": "v23.2.0",
+    "npm": "10.9.1"
   }
 }
