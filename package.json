@@ -5,6 +5,7 @@
   "version": "0.0.5",
   "main": "app.js",
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "debug": "4.4.1"
   }
 }
